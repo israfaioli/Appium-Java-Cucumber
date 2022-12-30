@@ -1,0 +1,9 @@
+image: docker.io/qazando/appium-maven
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - mvn test -Dlocal=devicefarm -Dplatform=android
