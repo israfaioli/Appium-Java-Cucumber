@@ -7,3 +7,4 @@ build:
   stage: build
   script:
     - mvn test -Dlocal=devicefarm -Dplatform=android
+  only: [merge_request]
