@@ -7,4 +7,10 @@ build:
   stage: build
   script:
     - mvn test -Dlocal=devicefarm -Dplatform=android
+    - mvn surefire-report:report-only
+    - mvn site -DgenerateReports=false
+  artifacts:
+    expire_in: 2 days
+    paths:
+      - target/site/
   only: [merge_request]
