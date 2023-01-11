@@ -31,3 +31,4 @@ jobs:
 
       - name: run test
         run: mvn test -Dlocal=devicefarm -Dplatform=android
+        #teste
