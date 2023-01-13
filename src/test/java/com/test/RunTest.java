@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 )
 
 public class RunTest {
-
     @AfterClass
     public static void stop() {
         Hooks.quitDriver();
