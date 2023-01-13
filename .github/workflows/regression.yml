@@ -3,6 +3,8 @@ name:   regression tests
 on:
   pull_request:
     branches: [ main ]
+  #schedule:
+  #  - cron: '* 10 * * 1-5'
 
 jobs:
   runTest:
@@ -42,5 +44,28 @@ jobs:
           name: surefire-report
           path: "**/surefire-reports/"
 
-        #https://github.com/marketplace/
-        #validar pipeline
+      - name: enviar notificação slack
+        uses: rtCamp/action-slack-notify@v2
+        if: ${{ success() }}
+        env:
+            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+            SLACK_CHANNEL: devops-automation-tests
+            SLACK_COLOR: ${{job.status}}
+            SLACK_MESSAGE: 'execução dos testes finalizada.'
+            SLACK_TITLE: 'pipeline devops slack'
+            SLACK_USERNAME: SUCESSO
+
+      - name: enviar notificação slack
+        uses: rtCamp/action-slack-notify@v2
+        if: ${{ failure() }}
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: devops-automation-tests
+          SLACK_COLOR: ${{job.status}}
+          SLACK_MESSAGE: 'execução dos testes finalizada.'
+          SLACK_TITLE: 'pipeline devops slack
+          SLACK_USERNAME: FALHA
+        #https://github.com/marketplace/actions/setup-chromedriver
+        #https://github.com/marketplace/actions/setup-java-jdk
+        #https://github.com/marketplace/actions/upload-a-build-artifact
+        #https://github.com/marketplace/actions/slack-notify
