@@ -32,3 +32,4 @@ jobs:
       - name: run test
         run: mvn test -Dlocal=devicefarm -Dplatform=android
         #https://github.com/marketplace/
+        #validar pipeline
